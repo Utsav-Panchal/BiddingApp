@@ -15,13 +15,13 @@ const seedDatabase = async () => {
     });
     console.log('Connected to MongoDB');
 
-    // Clear existing data (optional)
+    // Clear existing data
     await User.deleteMany({});
     await Product.deleteMany({});
     await Bid.deleteMany({});
     console.log('Cleared existing data');
 
-    // Insert users
+    // Create users (1 admin + 9 regular users)
     const hashedPassword = await bcrypt.hash('admin123', 10);
     const adminUser = new User({
       username: 'admin',
@@ -30,96 +30,128 @@ const seedDatabase = async () => {
     });
     await adminUser.save();
 
-    const userHashedPassword = await bcrypt.hash('user123', 10);
-    const regularUser = new User({
-      username: 'user',
-      password: userHashedPassword,
-      role: 'user'
-    });
-    await regularUser.save();
-    console.log('Inserted users');
+    const users = [];
+    for (let i = 1; i <= 9; i++) {
+      const userHashedPassword = await bcrypt.hash(`user${i}123`, 10);
+      const user = new User({
+        username: `user${i}`,
+        password: userHashedPassword,
+        role: 'user'
+      });
+      await user.save();
+      users.push(user);
+    }
+    console.log('Inserted 10 users (1 admin + 9 regular users)');
 
-    // Insert products
-    const product1 = new Product({
-      name: 'Laptop',
-      description: 'High-performance laptop',
-      basePrice: 1000,
-      biddingDeadline: new Date('2025-12-31T23:59:59.999Z'),
-      bids: [],
-      status: 'open'
-    });
-    await product1.save();
+    // Create products (5 expired + 5 active)
+    const expiredProducts = [];
+    const activeProducts = [];
 
-    const product2 = new Product({
-      name: 'Smartphone',
-      description: 'Latest smartphone model',
-      basePrice: 800,
-      biddingDeadline: new Date('2025-12-31T23:59:59.999Z'),
-      bids: [],
-      status: 'open'
-    });
-    await product2.save();
-    console.log('Inserted products');
+    // Expired products (5)
+    for (let i = 1; i <= 5; i++) {
+      const product = new Product({
+        name: `Expired Product ${i}`,
+        description: `This is an expired product ${i} for testing`,
+        basePrice: 100 + (i * 50),
+        biddingDeadline: new Date('2023-01-01'), // Past date
+        bids: [],
+        status: 'closed'
+      });
+      await product.save();
+      expiredProducts.push(product);
+    }
 
+    // Active products (5)
+    for (let i = 1; i <= 5; i++) {
+      const product = new Product({
+        name: `Active Product ${i}`,
+        description: `This is an active product ${i} for testing`,
+        basePrice: 200 + (i * 50),
+        biddingDeadline: new Date(Date.now() + (i * 7 * 24 * 60 * 60 * 1000)), // 7, 14, 21, 28, 35 days from now
+        bids: [],
+        status: 'open'
+      });
+      await product.save();
+      activeProducts.push(product);
+    }
+    console.log('Inserted 10 products (5 expired + 5 active)');
 
-    // Product to test winner selection
-    const pastProduct = new Product({
-      name: 'Old Laptop',
-      description: 'An old laptop model',
-      basePrice: 500,
-      biddingDeadline: new Date('2023-01-01T00:00:00.000Z'), // Past date
-      bids: [],
-      status: 'open'
-    });
-    await pastProduct.save();
+    // Create bids for expired products and assign winners
+    for (let i = 0; i < expiredProducts.length; i++) {
+      const product = expiredProducts[i];
+      const numBids = 3 + Math.floor(Math.random() * 5); // 3-7 bids per product
 
+      // Create bids
+      const bids = [];
+      for (let j = 0; j < numBids; j++) {
+        const userIndex = Math.floor(Math.random() * users.length);
+        const amount = product.basePrice + 10 + Math.floor(Math.random() * 100);
 
-    // Insert bids
+        const bid = new Bid({
+          amount: amount,
+          user: users[userIndex]._id,
+          product: product._id,
+          timestamp: new Date('2022-12-' + (10 + j)) // Dates before deadline
+        });
+        await bid.save();
+        bids.push(bid);
+      }
 
-    // Bid to test winner selection
-    const oldBid1 = new Bid({
-      amount: 600,
-      user: adminUser._id,
-      product: pastProduct._id,
-      timestamp: new Date('2023-01-01T01:00:00.000Z')
-    });
-    await oldBid1.save();
+      // Update product with bids
+      product.bids = bids.map(bid => bid._id);
 
-    const oldBid2 = new Bid({
-      amount: 700,
-      user: regularUser._id,
-      product: pastProduct._id,
-      timestamp: new Date('2023-01-01T02:00:00.000Z')
-    });
-    await oldBid2.save();
+      // Find the highest bid and assign winner
+      const highestBid = bids.reduce((max, bid) => bid.amount > max.amount ? bid : max, bids[0]);
+      product.winner = highestBid.user;
+      product.status = 'closed';
 
-    pastProduct.bids.push(oldBid1._id, oldBid2._id);
-    await pastProduct.save();
+      await product.save();
+    }
+    console.log('Added bids and winners to expired products');
 
-    // Update past product with bid
-    const bid1 = new Bid({
-      amount: 1100,
-      user: adminUser._id,
-      product: product1._id,
-      timestamp: new Date()
-    });
-    await bid1.save();
+    // Create bids for active products
+    for (let i = 0; i < activeProducts.length; i++) {
+      const product = activeProducts[i];
+      const numBids = 2 + Math.floor(Math.random() * 4); // 2-5 bids per product
 
-    const bid2 = new Bid({
-      amount: 850,
-      user: regularUser._id,
-      product: product2._id,
-      timestamp: new Date()
-    });
-    await bid2.save();
-    console.log('Inserted bids');
+      // Create bids
+      const bids = [];
+      for (let j = 0; j < numBids; j++) {
+        const userIndex = Math.floor(Math.random() * users.length);
+        const amount = product.basePrice + 10 + Math.floor(Math.random() * 50);
 
-    // Update products with bids
-    product1.bids.push(bid1._id);
-    await product1.save();
-    product2.bids.push(bid2._id);
-    await product2.save();
-    console.log('Updated products with bids');
+        const bid = new Bid({
+          amount: amount,
+          user: users[userIndex]._id,
+          product: product._id,
+          timestamp: new Date(Date.now() - (j * 24 * 60 * 60 * 1000)) // Recent bids
+        });
+        await bid.save();
+        bids.push(bid);
+      }
+
+      // Update product with bids
+      product.bids = bids.map(bid => bid._id);
+      await product.save();
+    }
+    console.log('Added bids to active products');
+
+    // Add some bids from admin user to active products
+    for (let i = 0; i < activeProducts.length; i++) {
+      const product = activeProducts[i];
+      const amount = product.basePrice + 50 + Math.floor(Math.random() * 100);
+
+      const bid = new Bid({
+        amount: amount,
+        user: adminUser._id,
+        product: product._id,
+        timestamp: new Date()
+      });
+      await bid.save();
+      product.bids.push(bid._id);
+      await product.save();
+    }
+    console.log('Added admin bids to active products');
 
     console.log('Database seeded successfully!');
   } catch (err) {
