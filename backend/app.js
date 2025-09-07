@@ -11,6 +11,16 @@ const productRoutes = require('./routes/product');
 const userRoutes = require('./routes/user');
 
 const app = express();
+
+
+
+// Enable CORS for all routes
+app.use(cors({
+    origin: 'http://localhost:3000', // Allow requests from your frontend
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true,
+}));
+
 app.use(cors());
 app.use(express.json());
 

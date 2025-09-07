@@ -9,6 +9,8 @@ const router = express.Router();
 router.post('/bids', auth(['user']), async (req, res) => {
     try {
         const { productId, amount } = req.body;
+        console.log(req.body);
+        console.log("_+++++++++++++++++++++++++++++++")
         const product = await Product.findById(productId);
 
         // Check if product exists and bidding is open

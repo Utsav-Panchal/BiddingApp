@@ -9,7 +9,9 @@ const productSchema = new mongoose.Schema({
 
     //  For a winner Selection
     winner: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-    status: { type: String, enum: ['open', 'closed'], default: 'open' }
+    status: { type: String, enum: ['open', 'closed'], default: 'open' },
+
+    // image: { type: String, default: '' }
 });
 
 module.exports = mongoose.model('Product', productSchema);
