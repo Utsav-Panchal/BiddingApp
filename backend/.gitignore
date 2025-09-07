@@ -1,0 +1,57 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Environment variables
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Build files
+build/
+dist/
+.next/
+out/
+
+# Logs
+logs/
+*.log
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Database
+*.sqlite
+*.db
+
+# Uploads
+public/uploads/
+uploads/
+
+# Coverage
+coverage/
+*.lcov
+
+# Dependencies
+client/node_modules/
+server/node_modules/
+
+# Local storage
+storage/
