@@ -1,0 +1,138 @@
+.product-main-container {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    min-height: 80vh;
+    width: 100vw;
+    max-width: 100vw;
+    box-sizing: border-box;
+    padding: 2rem 2rem;
+}
+
+/* Product details section */
+.product-details {
+    flex: 2.2;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.13);
+    padding: 2rem 2rem 2rem 2rem;
+    min-width: 360px;
+    min-height: 480px;
+}
+
+.product-image-container {
+    width: 100%;
+    height: 360px;
+    max-height: 420px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f2f2f2;
+    border-radius: 8px;
+}
+
+.product-image-container img {
+    width: auto;
+    max-width: 95%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 6px;
+}
+
+.product-details h2 {
+    font-size: 2.2rem;
+    margin: 0;
+    color: #3e2341;
+}
+
+.product-details p {
+    font-size: 1.14rem;
+    color: #555;
+    margin: 0.4rem 0;
+}
+
+.price-label,
+.bid-label {
+    font-weight: 600;
+}
+
+.price-label span,
+.bid-label span {
+    font-weight: 700;
+    color: #46245b;
+}
+
+/* Bids management panel */
+.bids-panel {
+    flex: 1.2;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.11);
+    padding: 2rem 1.5rem;
+    min-width: 320px;
+    min-height: 480px;
+    align-items: flex-start;
+}
+
+.bids-panel h3 {
+    margin-bottom: 0.5rem;
+    font-size: 1.25rem;
+    color: #3e2341;
+}
+
+.bids-list {
+    flex: 1;
+    overflow-y: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.bid-item {
+    padding: 1rem 0.5rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    background: #f7f7fa;
+    font-size: 1.06rem;
+    color: #3e2341;
+}
+
+.edit-product-button {
+    margin-top: 1.5rem;
+    padding: 0.75rem 1.75rem;
+    background-color: #5b6fff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 1.05rem;
+    transition: background 0.2s;
+}
+
+.edit-product-button:hover {
+    background-color: #3a49a3;
+}
+
+@media only screen and (max-width: 900px) {
+    .product-main-container {
+        flex-direction: column;
+        padding: 1rem 0.5rem;
+        gap: 1.5rem;
+    }
+
+    .bids-panel,
+    .product-details {
+        min-width: 200px;
+        width: 100%;
+        padding: 1.2rem;
+    }
+}
