@@ -1,0 +1,53 @@
+.winner-card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 1rem;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+}
+
+.winner-image-container {
+    height: 180px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f9f9f9;
+}
+
+.winner-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.winner-info {
+    padding: 1rem;
+}
+
+.winner-info h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.winner-info p {
+    margin: 0.25rem 0;
+    font-size: 0.95rem;
+    color: #666;
+}
+
+.winner-name {
+    font-weight: bold;
+    color: #4CAF50;
+    font-size: 1rem;
+}
+
+.no-winner {
+    font-style: italic;
+    color: #d32f2f;
+}

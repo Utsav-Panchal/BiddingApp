@@ -1,0 +1,17 @@
+.winners-page {
+    padding: 2rem;
+}
+
+.winners-page h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    color: #333;
+}
+
+.winners-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    justify-content: center;
+}
