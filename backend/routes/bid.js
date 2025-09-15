@@ -9,8 +9,6 @@ const router = express.Router();
 router.post('/bids', auth(['user']), async (req, res) => {
     try {
         const { productId, amount } = req.body;
-        console.log(req.body);
-        console.log("_+++++++++++++++++++++++++++++++")
         const product = await Product.findById(productId);
 
         // Check if product exists and bidding is open
@@ -26,7 +24,7 @@ router.post('/bids', auth(['user']), async (req, res) => {
             return res.status(400).send('Bid too low');
         }
 
-        // Create and save the new bid
+
         const bid = new Bid({ amount, user: req.user.id, product: productId });
         await bid.save();
 

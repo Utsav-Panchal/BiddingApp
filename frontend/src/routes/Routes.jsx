@@ -10,7 +10,6 @@ import WinnersPage from '../pages/WinnersPage';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
 import AdminDashboard from '../pages/AdminDashboard';
-// import AdminProductDetailPage from '../pages/AdminProductDetailPage';
 import AdminWinners from '../pages/AdminWinnerPage';
 
 const RoutesComponent = () => {

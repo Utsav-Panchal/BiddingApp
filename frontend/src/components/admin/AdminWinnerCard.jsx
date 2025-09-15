@@ -5,7 +5,7 @@ const WinnerCard = ({ product }) => {
     return (
         <div className="winner-card">
             <div className="winner-image-container">
-                <img src={product.image || 'https://www.gstatic.com/webp/gallery/1.jpg'} alt={product.name} />
+                <img src={product.image || 'https://m.media-amazon.com/images/I/61DOVeXWUiL._AC_SX679_.jpg'} alt={product.name} />
             </div>
             <div className="winner-info">
                 <h3>{product.name}</h3>

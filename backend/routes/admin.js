@@ -5,28 +5,6 @@ const auth = require('../middleware/auth');
 const router = express.Router();
 const upload = require('../utils/fileUpload');
 
-
-// router.post('/products', auth(['admin']), upload.single('image'), async (req, res) => {
-//     try {
-//         const { name, description, basePrice, biddingDeadline } = req.body;
-
-//         // Create product with image path if uploaded
-//         const productData = {
-//             name,
-//             description,
-//             basePrice,
-//             biddingDeadline,
-//             image: req.file ? `/uploads/${req.file.filename}` : ''
-//         };
-
-//         const product = new Product(productData);
-//         await product.save();
-//         res.status(201).json(product);
-//     } catch (err) {
-//         res.status(400).json({ error: err.message });
-//     }
-// });
-
 router.post('/products', auth(['admin']), upload.single('image'), async (req, res) => {
     try {
         const { name, description, basePrice, biddingDeadline } = req.body;
@@ -214,45 +192,7 @@ router.get('/bids', auth(['admin']), async (req, res) => {
 
 //÷+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++÷÷
 
-// router.get('/winners', auth(['admin']), async (req, res) => {
-//     try {
-//         const now = new Date();
-//         // const products = await Product.find({ biddingDeadline: { $lt: now }, status: 'closed' })
-//         //     .populate('winner', 'username')
-//         //     .populate('bids');
-
-//         const products = await Product.find({ biddingDeadline: { $lt: now }, status: 'closed' })
-//             .populate('winner', 'username')
-//             .populate({
-//                 path: 'bids',
-//                 populate: {
-//                     path: 'user',
-//                     select: 'username'
-//                 }
-//             });
-
-//         const productsWithWinners = products.map(product => {
-//             const highestBid = product.bids.length > 0
-//                 ? Math.max(...product.bids.map(bid => bid.amount))
-//                 : null;
-
-//             return {
-//                 _id: product._id,
-//                 name: product.name,
-//                 description: product.description,
-//                 highestBid: highestBid,
-//                 winner: product.winner,
-//                 bids: product.bids,
-//                 biddingDeadline: product.biddingDeadline
-//             };
-//         });
-
-//         res.json(productsWithWinners);
-//     } catch (err) {
-//         res.status(500).json({ error: err.message });
-//     }
-// });
-
+// Get All Winners (Admin only)
 router.get('/winners', auth(['admin']), async (req, res) => {
     try {
         const now = new Date();
@@ -266,7 +206,7 @@ router.get('/winners', auth(['admin']), async (req, res) => {
                     select: 'username'
                 }
             });
-        console.log("++++++++++++++++++++++++++++++ products:");
+
         const productsWithWinners = products.map(product => {
             const highestBid = product.bids.length > 0
                 ? Math.max(...product.bids.map(bid => bid.amount))

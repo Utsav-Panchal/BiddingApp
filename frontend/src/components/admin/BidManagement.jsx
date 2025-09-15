@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-// import '/Users/utsavpanchal/Documents/Assignment/ShipVista/BiddingApp/frontend/src/styles/bidManagement.css';
 import '../../styles/bidManagement.css';
 
 const BidManagement = ({ bid, onUpdate, onDelete }) => {

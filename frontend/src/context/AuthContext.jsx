@@ -25,9 +25,6 @@ export const AuthProvider = ({ children }) => {
 
     const registerUser = async (userData) => {
         await registerService(userData);
-        // const decoded = jwtDecode(res.data.token);
-        // localStorage.setItem('token', res.data.token);
-        // setUser({ ...decoded, token: res.data.token });
     };
 
     const logout = () => {
