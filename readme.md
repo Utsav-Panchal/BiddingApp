@@ -14,8 +14,8 @@ Before you begin, ensure you have the following installed on your machine:
 1. **Clone the Repository:**
 
    ```bash
-   git clone <your-repository-url>
-   cd <your-repository-folder>
+   git clone https://github.com/Utsav-Panchal/BiddingApp.git
+   cd BiddingApp
 
 2. **Install Backend Dependencies:**
     ```bash
