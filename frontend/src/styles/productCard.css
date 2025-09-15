@@ -1,0 +1,106 @@
+.product-card {
+    width: 250px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin: 1rem;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.product-image-container {
+    height: 180px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f9f9f9;
+}
+
+.product-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.product-info {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.product-name {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.product-description {
+    margin: 0.5rem 0;
+    font-size: 0.85rem;
+    color: #666;
+    flex-grow: 1;
+}
+
+.product-price-container {
+    margin: 0.5rem 0;
+}
+
+.product-price,
+.product-highest-bid {
+    margin: 0.25rem 0;
+    font-size: 0.9rem;
+}
+
+.product-price span,
+.product-highest-bid span {
+    color: #2a7f5f;
+    font-weight: bold;
+}
+
+.product-deadline-container {
+    margin: 0.5rem 0;
+    font-size: 0.8rem;
+}
+
+.product-deadline {
+    margin: 0.25rem 0;
+}
+
+.open {
+    color: #2a7f5f;
+    font-weight: bold;
+}
+
+.closed {
+    color: #d32f2f;
+    font-weight: bold;
+}
+
+.bid-button {
+    display: block;
+    width: 100%;
+    padding: 0.5rem;
+    margin-top: auto;
+    background-color: #4caf50;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.bid-button:hover {
+    background-color: #45a049;
+}

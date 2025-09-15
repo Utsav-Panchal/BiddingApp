@@ -1,0 +1,32 @@
+/* .winners-page {
+    padding: 2rem;
+}
+
+.winners-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.winner-card {
+    background-color: white;
+    padding: 1rem;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+} */
+
+.winners-page {
+    padding: 2rem;
+}
+
+.winners-page h1 {
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.winners-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+    justify-content: center;
+}

@@ -1,0 +1,46 @@
+.bid-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin: 1rem 0;
+}
+
+.bid-input-container {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.bid-form input {
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    flex: 1;
+}
+
+.bid-form button {
+    padding: 0.5rem 1rem;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.bid-form button:hover {
+    background-color: #45a049;
+}
+
+.error-message {
+    color: #d32f2f;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.success-message {
+    color: #2a7f5f;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}

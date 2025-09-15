@@ -1,0 +1,14 @@
+.home {
+    padding: 2rem;
+    flex: 1;
+}
+
+.home h1 {
+    margin-bottom: 1rem;
+}
+
+.content {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+}
